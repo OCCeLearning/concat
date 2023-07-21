@@ -6,9 +6,14 @@ data_directory = "./input"
 df = []
 for file in os.listdir(data_directory):
     if file.endswith(".xlsx"):
-        print("Loading file {0}...".format(file))
+        print("Loading Excel file {0}...".format(file))
         df.append(
             pd.read_excel(os.path.join(data_directory, file), sheet_name="RawData")
+        )
+    if file.endswith(".csv"):
+        print("Loading CSV file {0}...".format(file))
+        df.append(
+            pd.read_csv(os.path.join(data_directory, file), sep=",")
         )
 df_master = pd.concat(df, axis=0)
 if os.path.isdir("./output"):
